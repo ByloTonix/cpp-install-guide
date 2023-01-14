@@ -31,8 +31,8 @@ Select "Edit" and add `C:\msys64\mingw64\bin` (or the path you selected when ins
 
 ## CMake
 
-1. Install CMake (Binary distributions) - [https://cmake.org/download/](https://cmake.org/download/)
-2. Install "CMake Tools" extension from within VS Code.
+1. Open MSYS2
+2. Run the command `pacman -S mingw-w64-x86_64-cmake`
 
 
 ### Test your installation
