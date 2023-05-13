@@ -18,6 +18,28 @@ We continue using VS Code, so this guide focuses on installing just the framewor
 1. Install MSYS2 if you haven't already - https://www.msys2.org/
 2. Install the Qt6 Base package - `pacman -S mingw-w64-x86_64-qt6-base` - https://packages.msys2.org/package/mingw-w64-x86_64-qt6-base
 
+#### Troubleshooting
+
+If the command above doesn't work with an error message about a **corrupted package and a PGP signature**, run the command `pacman-key --refresh`, then run the command above again.
+
+If the command above doesn't work with an error message about **SSL connection**, edit files `C:\msys64\etc\pacman.d\mirrorlist.mingw64` and `C:\msys64\etc\pacman.d\mirrorlist.msys` (you can open them with Notepad++, VS Code or other text editor). Move the Yandex link to the top of the section "Primary", so the start of the file looks like this:
+
+```
+# See https://www.msys2.org/dev/mirrors
+
+## Primary
+Server = https://mirror.yandex.ru/mirrors/msys2/msys/$arch/
+Server = https://mirror.msys2.org/msys/$arch/
+Server = https://repo.msys2.org/msys/$arch/
+
+## Tier 1
+```
+
+If you installed everything, but building doesn't work, and the error message mentions **other paths to Qt** (for example, a path with "Anaconda" in it), you need to tell CMake which Qt version to use. More info on this here - https://github.com/KDAB/GammaRay/issues/213
+
+Open extension settings of CMake Tools and add a build environment variable and a config environment variable with the key `CMAKE_PREFIX_PATH` and value `C:\msys64\mingw64`. Then delete the folder `build` if your project and try to build it again.
+
+
 ## Qt Creator
 
 Both Homebrew and MSYS2 have packages for Qt Creator:
